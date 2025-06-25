@@ -1,0 +1,6 @@
+services:
+  shoporiadb:
+    image: postgres
+
+volumes:
+  postgres_shoporiadb:  

@@ -1,0 +1,12 @@
+services:
+  shoporiadb:
+    container_name: shoporiadb
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Yaser@2003
+      - POSTGRES_DB=ShoporiaDb
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_shoporiadb:/var/lib/postgresql/data/
