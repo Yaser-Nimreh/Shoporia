@@ -3,4 +3,4 @@ global using Carter;
 global using Catalog;
 global using Ordering;
 global using Scalar.AspNetCore;
-global using Shared.Extensions;
+global using SharedKernel.Extensions;

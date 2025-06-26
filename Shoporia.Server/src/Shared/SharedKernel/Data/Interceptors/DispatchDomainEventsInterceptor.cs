@@ -1,4 +1,4 @@
-﻿namespace Shared.Data.Interceptors;
+﻿namespace SharedKernel.Data.Interceptors;
 
 public class DispatchDomainEventsInterceptor(IMediator mediator) : SaveChangesInterceptor
 {

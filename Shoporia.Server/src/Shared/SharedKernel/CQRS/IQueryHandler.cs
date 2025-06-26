@@ -1,6 +1,4 @@
-﻿using MediatR;
-
-namespace Shared.CQRS;
+﻿namespace SharedKernel.CQRS;
 
 public interface IQueryHandler<in TQuery, TResponse> 
     : IRequestHandler<TQuery, TResponse>

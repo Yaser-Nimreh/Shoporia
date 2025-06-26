@@ -1,4 +1,4 @@
-﻿namespace Shared.Extensions;
+﻿namespace SharedKernel.Extensions;
 
 public static class CarterExtensions
 {

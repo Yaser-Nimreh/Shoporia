@@ -1,4 +1,4 @@
-﻿namespace Shared.Data;
+﻿namespace SharedKernel.Data;
 
 public static class Extensions
 {

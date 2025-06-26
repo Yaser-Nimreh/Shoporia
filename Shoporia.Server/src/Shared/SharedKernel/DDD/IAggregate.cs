@@ -1,4 +1,4 @@
-﻿namespace Shared.DDD;
+﻿namespace SharedKernel.DDD;
 
 public interface IAggregate<T> : IAggregate, IEntity<T> { }
 

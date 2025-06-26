@@ -5,6 +5,6 @@ global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.ChangeTracking;
 global using Microsoft.EntityFrameworkCore.Diagnostics;
 global using Microsoft.Extensions.DependencyInjection;
-global using Shared.Data.Seed;
-global using Shared.DDD;
+global using SharedKernel.Data.Seed;
+global using SharedKernel.DDD;
 global using System.Reflection;
