@@ -1,14 +1,16 @@
-﻿namespace Catalog.Products.Features.GetProducts;
+﻿using SharedKernel.Pagination;
 
-public record GetProductsResponse(IEnumerable<ProductDTO> Products);
+namespace Catalog.Products.Features.GetProducts;
+
+public record GetProductsResponse(PaginatedResult<ProductDTO> Products);
 
 public class GetProductsEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("/products", async (ISender sender) =>
+        app.MapGet("/products", async ([AsParameters] PaginationRequest paginationRequest, ISender sender) =>
         {
-            var query = new GetProductsQuery();
+            var query = new GetProductsQuery(paginationRequest);
 
             var result = await sender.Send(query);
 

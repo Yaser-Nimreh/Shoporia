@@ -1,6 +1,11 @@
+version: '3.8'
+
 services:
   shoporiadb:
     image: postgres
+
+  seq:
+    image: datalust/seq:latest
 
 volumes:
   postgres_shoporiadb:  

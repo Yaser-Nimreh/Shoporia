@@ -1,14 +1,16 @@
-﻿namespace Catalog.Categories.Features.GetCategories;
+﻿using SharedKernel.Pagination;
 
-public record GetCategoriesResponse(IEnumerable<CategoryDTO> Categories);
+namespace Catalog.Categories.Features.GetCategories;
+
+public record GetCategoriesResponse(PaginatedResult<CategoryDTO> Categories);
 
 public class GetCategoriesEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("/categories", async (ISender sender) =>
+        app.MapGet("/categories", async ([AsParameters] PaginationRequest paginationRequest, ISender sender) =>
         {
-            var query = new GetCategoriesQuery();
+            var query = new GetCategoriesQuery(paginationRequest);
 
             var result = await sender.Send(query);
 

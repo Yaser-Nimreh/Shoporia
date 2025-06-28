@@ -9,10 +9,14 @@ public static class CatalogModule
         // Api Endpoint services
 
         // Application Use Case services
-        services.AddMediatR(config =>
+        services.AddMediatR(configuration =>
         {
-            config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            configuration.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            configuration.AddOpenBehavior(typeof(LoggingBehavior<,>));
         });
+
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         // Data - Infrastructure services
         var connectionString = configuration.GetConnectionString("Database");

@@ -4,13 +4,30 @@ public record UpdateCategoryCommand(CategoryDTO Category) : ICommand<UpdateCateg
 
 public record UpdateCategoryCommandResult(bool IsSuccess);
 
+public class UpdateCategoryCommandValidator : AbstractValidator<UpdateCategoryCommand>
+{
+    public UpdateCategoryCommandValidator()
+    {
+        RuleFor(c => c.Category.Id)
+            .NotEmpty().WithMessage("Category ID is required.");
+
+        RuleFor(c => c.Category.Name)
+            .NotEmpty().WithMessage("Category name is required.")
+            .MaximumLength(100).WithMessage("Category name must not exceed 100 characters.");
+        
+        RuleFor(c => c.Category.Description)
+            .NotEmpty().WithMessage("Category description is required.")
+            .MaximumLength(500).WithMessage("Category description must not exceed 500 characters.");
+    }
+}
+
 public class UpdateCategoryCommandHandler(CatalogDbContext dbContext) : ICommandHandler<UpdateCategoryCommand, UpdateCategoryCommandResult>
 {
     public async Task<UpdateCategoryCommandResult> Handle(UpdateCategoryCommand command, CancellationToken cancellationToken)
     {
         var category = await dbContext.Categories.FindAsync([command.Category.Id], cancellationToken) 
-            ?? throw new Exception($"Category with ID {command.Category.Id} not found.");
-        
+            ?? throw new CategoryNotFoundException(command.Category.Id);
+
         UpdateCategoryWithNewValues(category, command.Category);
 
         dbContext.Categories.Update(category);

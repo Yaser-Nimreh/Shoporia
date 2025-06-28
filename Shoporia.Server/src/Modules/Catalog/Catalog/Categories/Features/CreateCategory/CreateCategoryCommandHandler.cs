@@ -4,6 +4,20 @@ public record CreateCategoryCommand(CategoryDTO Category) : ICommand<CreateCateg
 
 public record CreateCategoryCommandResult(Guid Id);
 
+public class CreateCategoryCommandValidator : AbstractValidator<CreateCategoryCommand>
+{
+    public CreateCategoryCommandValidator()
+    {
+        RuleFor(c => c.Category.Name)
+            .NotEmpty().WithMessage("Category name is required.")
+            .MaximumLength(100).WithMessage("Category name must not exceed 100 characters.");
+        
+        RuleFor(c => c.Category.Description)
+            .NotEmpty().WithMessage("Category description is required.")
+            .MaximumLength(500).WithMessage("Category description must not exceed 500 characters.");
+    }
+}
+
 public class CreateCategoryCommandHandler(CatalogDbContext dbContext) : ICommandHandler<CreateCategoryCommand, CreateCategoryCommandResult>
 {
     public async Task<CreateCategoryCommandResult> Handle(CreateCategoryCommand command, CancellationToken cancellationToken)

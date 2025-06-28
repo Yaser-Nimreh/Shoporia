@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   shoporiadb:
     container_name: shoporiadb
@@ -10,3 +12,12 @@ services:
       - "5432:5432"
     volumes:
       - postgres_shoporiadb:/var/lib/postgresql/data/
+
+  seq:
+    container_name: seq
+    environment:
+      - ACCEPT_EULA=Y
+    restart: always
+    ports:
+      - "5341:5341"
+      - "9091:80"
